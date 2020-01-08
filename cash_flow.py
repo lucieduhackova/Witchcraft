@@ -70,7 +70,7 @@ def delete_all_row_cf(conn, smazat_cely_radek_datum):
 
 
 def main():
-    database = (r"C:\pywitches\Witchcraft\cash_flow.db")
+    database = (r"cash_flow.db")
 
     sql_create_cf_table = """ CREATE TABLE IF NOT EXISTS cf (
                                         date text,
