@@ -1,6 +1,6 @@
 # craft.py
---- tady se budou delat zmeny pro vetev json_csv ---
-# json_csv
+# --- tady se muzou delat zmeny z sql vetve ---
+# sql
 
 
----- konec pro json_csv ----------------------------
+# ---- konec pro sql ----------------------------
