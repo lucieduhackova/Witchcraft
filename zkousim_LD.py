@@ -1,7 +1,8 @@
 import csv
 
 # oteviram a nacitam vydaje:
-with open('testuju.csv', 'r') as file:
+# 'w+' je 'w' a 'r' dohromady
+with open('testuju.csv', 'w+') as file:
     reader = csv.reader(file)
     vydaje = list(reader)
 
