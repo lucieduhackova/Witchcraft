@@ -1,7 +1,8 @@
 import csv
 
 # oteviram a nacitam vydaje:
-# 'w+' je 'w' a 'r' dohromady
+# 'w+' je 'w'(write) a 'r'(read) dohromady
+# 'w' a 'w+' vytvori soubor, pokud jeste neexistuje
 with open('testuju.csv', 'w+') as file:
     reader = csv.reader(file)
     vydaje = list(reader)
@@ -14,7 +15,7 @@ zacatek_radku = ' |' + ' '*2
 zacatek_tabulky = f'{delici_cara}\n{prazdny_radek}'
 konec_tabulky = f'{prazdny_radek}\n{delici_cara}'
 
-# jeste treba dodelat automaticke dopocitavani konce radku
+# jeste muzu dodelat automaticke dopocitavani konce radku
 pocet_na_radku = 56
 pocet_na_zacatku_radku = 4
 rozdil_znaku = pocet_na_radku - pocet_na_zacatku_radku
@@ -24,6 +25,10 @@ rozdil_znaku = pocet_na_radku - pocet_na_zacatku_radku
 
 
 # --- definovani funkci ----------------------------
+
+# tohle by slo urcite jeste zjednodusit, ale je to jen docasne, takze se s tim neserme
+# je to jen na lepsi orientaci v prikazovem konec_radku
+# nakonec bychom meli mit hezkou grafiku od Peti
 def show_menu():
     print()
     print(zacatek_tabulky)
@@ -87,6 +92,8 @@ def novy_vydaj():
     print(konec_tabulky)
 
 
+# holky, ja uz nevim, k cemu tohle mam, radsi to jeste necham:
+
 # def ulozit_novy_vydaj():
 #     novy = novy_vydaj()
 #     print(prazdny_radek)
@@ -106,6 +113,10 @@ def novy_vydaj():
 #     print(konec_tabulky)
 
 # --- konec definovani funkci ----------------------
+
+# *** PRIDAT ***
+# cteni zaznamu - vyber podle data nebo podle kategorie nebo obojiho
+
 
 show_menu()
 question_menu()
