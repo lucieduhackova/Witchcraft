@@ -1,0 +1,8 @@
+
+pomucky od Adama ze stredy 2020-01-22:
+git fetch - vzdy pri zmenach udelat, aktualizuje metadata (dulezity napriklad pri tvoreni novych vetvi a tak)
+
+git branch - zobrazi aktualni vetve na lokalni verzi
+git branch a- - zobrazi vsechny vetve, i kdyz jsou jen na serveru
+
+git checkout nazev_vetve - prepnuti do druhe vetve, tim se nam to dostane na nasi lokalni verzi
