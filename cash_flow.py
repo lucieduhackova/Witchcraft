@@ -1,6 +1,28 @@
 import sqlite3
 from sqlite3 import Error
 
+rozhodovaci_dotaz = input("Chceš vkládat (v), mazat (m) nebo aktualizovat (a)? ")
+
+if rozhodovaci_dotaz == "v":
+    datum = input("Napiš datum ve formátu: RRRR-MM-DD ")
+    prijem = input("Napiš částku příjmu, pokud žádná, tak 0 ")
+    vydaj_jidlo = input("Pokud za jídlo napiš částku, pokud ne,napiš 0 ")
+    vydaj_obleceni = input("Pokud za obleční napiš částku, pokud ne,napiš 0 ")
+    vydaj_zabava = input("Pokud za zábavu napiš částku, pokud ne,napiš 0 ")
+    vydaj_fix = input("Pokud za fix napiš částku, pokud ne,napiš 0 ")
+elif rozhodovaci_dotaz == "m":
+    datum = input("Napiš datum ve formátu: RRRR-MM-DD ")
+elif rozhodovaci_dotaz == "a":
+    datum = input("Napiš datum ve formátu: RRRR-MM-DD ")
+    prijem = input("Napiš částku příjmu, pokud žádná, tak 0 ")
+    vydaj_jidlo = input("Pokud za jídlo napiš částku, pokud ne,napiš 0 ")
+    vydaj_obleceni = input("Pokud za obleční napiš částku, pokud ne,napiš 0 ")
+    vydaj_zabava = input("Pokud za zábavu napiš částku, pokud ne,napiš 0 ")
+    vydaj_fix = input("Pokud za fix napiš částku, pokud ne,napiš 0 ")
+else:
+    print("Nerozumím")
+    exit()
+
 # datum =input("Napiš datum ve formátu: RRRR-MM-DD ")
 # prijem = input("Napiš částku příjmu, pokud žádná, tak 0 ")
 # vydaj_jidlo = input("Pokud za jídlo napiš částku, pokud ne,napiš 0 ")
@@ -8,7 +30,9 @@ from sqlite3 import Error
 # vydaj_zabava = input("Pokud za zábavu napiš částku, pokud ne,napiš 0 ")
 # vydaj_fix = input("Pokud za fix napiš částku, pokud ne,napiš 0 ")
 # smazat_cely_radek_datum = input("chceš smazat řádek s datem? napiš, které datum rrrr-mm-dd ")
-update_radku = input("Chceš přidat data k určitému dni? Napiš datum rrrr-mm-dd")
+# update_radku = input("Chceš přidat data k určitému dni? Napiš datum rrrr-mm-dd")
+
+
 
 
 
@@ -62,7 +86,7 @@ def update_row(conn, update_radku):
     :param update_radku:
     :return: cf data
     """
-    sql = ''' UPDATE INTO cf income = ?, ex_food = ?, ex_cloth WHERE date = ?'''
+    sql = ''' UPDATE cf SET income = ?, ex_food = ?, ex_clothes = ?, ex_fun = ?, ex_fix = ? WHERE date = ?'''
     cur = conn.cursor()
     cur.execute(sql, update_radku)
     conn.commit()
@@ -91,25 +115,30 @@ def main():
                                         income integer,
                                         ex_food integer,
                                         ex_clothes integer,
-                                        ex_fun integer,
+                   
+                                     ex_fun integer,
                                         ex_fix integer) """
 
 
     conn = create_connection(database)
 
 
-    # create tables
     if conn is not None:
-        # create cf table
         create_table(conn, sql_create_cf_table)
 
     else:
         print("Error! cannot create the database connection.")
 
+    if rozhodovaci_dotaz == "v":
+        data = (datum, prijem, vydaj_jidlo, vydaj_obleceni, vydaj_zabava, vydaj_fix)
+        insert_dates(conn, data)
+    elif rozhodovaci_dotaz == "m":
+        delete_all_row_cf(conn, datum)
+    elif rozhodovaci_dotaz == "a":
+        update_radku = (prijem, vydaj_jidlo, vydaj_obleceni, vydaj_zabava, vydaj_fix, datum)
+        update_row(conn, update_radku)
 
-    # data = (datum, prijem, vydaj_jidlo, vydaj_obleceni, vydaj_zabava, vydaj_fix)
-    # insert_dates(conn, data)
-    # delete_all_row_cf(conn, smazat_cely_radek_datum)
+
 
 if __name__ == '__main__':
     main()
