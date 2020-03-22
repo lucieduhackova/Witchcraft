@@ -1,7 +1,7 @@
 import sqlite3
 from sqlite3 import Error
 
-rozhodovaci_dotaz = input("Chceš vkládat (v), mazat (m) nebo aktualizovat (a)? ")
+rozhodovaci_dotaz = input("Chceš vkládat (v), mazat (m) nebo aktualizovat (a), znat sumu prijmu (s) ")
 
 if rozhodovaci_dotaz == "v":
     datum = input("Napiš datum ve formátu: RRRR-MM-DD ")
@@ -19,6 +19,8 @@ elif rozhodovaci_dotaz == "a":
     vydaj_obleceni = input("Pokud za obleční napiš částku, pokud ne,napiš 0 ")
     vydaj_zabava = input("Pokud za zábavu napiš částku, pokud ne,napiš 0 ")
     vydaj_fix = input("Pokud za fix napiš částku, pokud ne,napiš 0 ")
+elif rozhodovaci_dotaz == "s":
+    pass
 else:
     print("Nerozumím")
     exit()
@@ -105,6 +107,15 @@ def delete_all_row_cf(conn, smazat_cely_radek_datum):
     cur.execute(sql, (smazat_cely_radek_datum,))
     conn.commit()
 
+def zustatek(conn):
+    cur = conn.cursor()
+    cur.execute("""SELECT SUM("income") - SUM("ex_food") - SUM("ex_clothes") - SUM("ex_fun") - SUM("ex_fix") FROM cf""")
+    conn.commit()
+    rows = cur.fetchall()
+    for row in rows:
+        print(row)
+
+
 
 
 def main():
@@ -137,8 +148,13 @@ def main():
     elif rozhodovaci_dotaz == "a":
         update_radku = (prijem, vydaj_jidlo, vydaj_obleceni, vydaj_zabava, vydaj_fix, datum)
         update_row(conn, update_radku)
+    elif rozhodovaci_dotaz == "s":
+        zustatek(conn)
+
 
 
 
 if __name__ == '__main__':
     main()
+
+
