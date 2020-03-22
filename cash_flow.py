@@ -107,7 +107,7 @@ def delete_all_row_cf(conn, smazat_cely_radek_datum):
     cur.execute(sql, (smazat_cely_radek_datum,))
     conn.commit()
 
-def zustatek(conn):
+def closing_balance(conn):
     cur = conn.cursor()
     cur.execute("""SELECT SUM("income") - SUM("ex_food") - SUM("ex_clothes") - SUM("ex_fun") - SUM("ex_fix") FROM cf""")
     conn.commit()
@@ -149,7 +149,7 @@ def main():
         update_radku = (prijem, vydaj_jidlo, vydaj_obleceni, vydaj_zabava, vydaj_fix, datum)
         update_row(conn, update_radku)
     elif rozhodovaci_dotaz == "s":
-        zustatek(conn)
+        closing_balance(conn)
 
 
 
