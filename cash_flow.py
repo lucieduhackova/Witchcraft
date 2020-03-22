@@ -1,7 +1,8 @@
 import sqlite3
 from sqlite3 import Error
 
-rozhodovaci_dotaz = input("Chceš vkládat (v), mazat (m) nebo aktualizovat (a), znat zůstatek (z) ")
+rozhodovaci_dotaz = input("Chceš vkládat (v), mazat (m), aktualizovat (a), znát zůstatek (z), znát sumu příjmů (sp),"
+                          "znát sumu všech výdajů (sv)")
 
 if rozhodovaci_dotaz == "v":
     datum = input("Napiš datum ve formátu: RRRR-MM-DD ")
@@ -20,6 +21,10 @@ elif rozhodovaci_dotaz == "a":
     vydaj_zabava = input("Pokud za zábavu napiš částku, pokud ne,napiš 0 ")
     vydaj_fix = input("Pokud za fix napiš částku, pokud ne,napiš 0 ")
 elif rozhodovaci_dotaz == "z":
+    pass
+elif rozhodovaci_dotaz =="sp":
+    pass
+elif rozhodovaci_dotaz == "sv":
     pass
 else:
     print("Nerozumím")
@@ -115,6 +120,23 @@ def closing_balance(conn):
     for row in rows:
         print(row)
 
+def sum_income(conn):
+    cur = conn.cursor()
+    cur.execute("""SELECT SUM("income") FROM cf""")
+    conn.commit()
+    rows = cur.fetchall()
+    for row in rows:
+        print(row)
+
+def sum_each_expenditure(conn):
+    cur = conn.cursor()
+    cur.execute("""SELECT SUM("ex_food"), SUM("ex_clothes"), SUM("ex_fun"), SUM("ex_fix") FROM cf""")
+    conn.commit()
+    rows = cur.fetchall()
+    for row in rows:
+        print(row)
+
+
 
 
 
@@ -150,6 +172,10 @@ def main():
         update_row(conn, update_radku)
     elif rozhodovaci_dotaz == "z":
         closing_balance(conn)
+    elif rozhodovaci_dotaz == "sp":
+        sum_income(conn)
+    elif rozhodovaci_dotaz == "sv":
+        sum_each_expenditure(conn)
 
 
 
