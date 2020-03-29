@@ -1,0 +1,12 @@
+CTRL + SHIFT + A     ---> vyhladávanie
+CTRL + F5            ---> znova spustí program 
+CTRL + ALT + L       ---> formátovanie textu
+CTRL + K             ---> commit
+ALT + 9              ---> version control
+CTRL + /             ---> zakomentujem - IBA S ANGL KLAVESNICOU!
+SHIFT + F6           ---> prepíšem všetky promìnné v kode
+
+Debug:
+CTRL + SHIFT + F8 a "ikonka brouèka" ---> zistím, kde v kóde je chyba
+F8 ---> prechádza mi riadok po riadku
+F9 ---> ukonèím program
